@@ -1,0 +1,55 @@
+#include <iostream>
+using namespace std;
+
+
+int fibonacci (int n){
+      if(n>0){
+        return n;
+      }
+      else{
+        return fibonacci(n-1)*fibonacci(n-2);
+      }
+    }
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+int main() 
+{
+    int arr[5] = {1,2,3,4,5};
+    int mat[3][3]={{1,2,3},{4,5,6},{7,8,9}};
+    
+    int length=sizeof(arr)/sizeof(arr[0]);
+    
+   // for(int i=0;i<length;i++)
+   //{
+   //       cout << arr[i] << " "<<;
+   // }
+    
+    cout<<"Size of entire array "<<sizeof(arr)<<" bytes"<<endl;
+    cout<<"Size of one element of the array "<<sizeof(arr[0])<<" bytes"<<endl;
+    
+    int rows = sizeof(mat)/sizeof(mat[0]);
+    int cols = sizeof(mat[0])/sizeof(mat[0][0]);
+    cout << "Number of rows and columns : "<< rows<<" and "<<cols<<endl;
+    
+    for(int j=0;j<rows;j++){
+      for (int k=0;k<cols;k++){
+        cout<<mat[j][k]<<" ";
+      }
+      cout<<endl;
+    }
+    
+    cout<<fibonacci(6);
+    
+}
+
+   
+
+    
