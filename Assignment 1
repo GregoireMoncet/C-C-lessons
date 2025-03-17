@@ -1,0 +1,160 @@
+using namespace std;
+
+class Account {
+private:
+    int accountNumber;
+    string name;
+    double balance;
+
+public:
+    Account(int accNum, string accName, double initialDeposit) {
+        accountNumber = accNum;
+        name = accName;
+        balance = initialDeposit;
+    }
+
+    int getAccountNumber() {
+        return accountNumber;
+    }
+
+    void deposit(double amount) {
+        balance += amount;
+        cout << "Deposited " << amount << " successfully. New Balance: " << balance << endl;
+    }
+
+    void withdraw(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+            cout << "Withdrawn " << amount << " successfully. New Balance: " << balance << endl;
+        } else {
+            cout << "Insufficient balance!" << endl;
+        }
+    }
+
+    void display() {
+        cout << "Account Number: " << accountNumber << " | Name: " << name << " | Balance: " << balance << endl;
+    }
+
+    bool transferTo(Account &receiver, double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+            receiver.deposit(amount);
+            cout << "Transfer successful." << endl;
+            return true;
+        } else {
+            cout << "Insufficient balance!" << endl;
+            return false;
+        }
+    }
+};
+
+vector<Account> accounts;
+
+void createAccount() {
+    int accNum;
+    string name;
+    double initialDeposit;
+    cout << "Enter Account Number: ";
+    cin >> accNum;
+    cout << "Enter Name: ";
+    cin >> name;
+    cout << "Enter Initial Deposit: ";
+    cin >> initialDeposit;
+    accounts.push_back(Account(accNum, name, initialDeposit));
+    cout << "Account created successfully!" << endl;
+}
+
+Account* findAccount(int accNum) {
+    for (auto &acc : accounts) {
+        if (acc.getAccountNumber() == accNum) {
+            return &acc;
+        }
+    }
+    return nullptr;
+}
+
+void depositMoney() {
+    int accNum;
+    double amount;
+    cout << "Enter Account Number: ";
+    cin >> accNum;
+    Account* acc = findAccount(accNum);
+    if (acc) {
+        cout << "Enter Amount to Deposit: ";
+        cin >> amount;
+        acc->deposit(amount);
+    } else {
+        cout << "Account not found!" << endl;
+    }
+}
+
+void withdrawMoney() {
+    int accNum;
+    double amount;
+    cout << "Enter Account Number: ";
+    cin >> accNum;
+    Account* acc = findAccount(accNum);
+    if (acc) {
+        cout << "Enter Amount to Withdraw: ";
+        cin >> amount;
+        acc->withdraw(amount);
+    } else {
+        cout << "Account not found!" << endl;
+    }
+}
+
+void transferMoney() {
+    int senderAccNum, receiverAccNum;
+    double amount;
+    cout << "Enter Sender Account Number: ";
+    cin >> senderAccNum;
+    cout << "Enter Receiver Account Number: ";
+    cin >> receiverAccNum;
+    cout << "Enter Amount to Transfer: ";
+    cin >> amount;
+
+    Account* sender = findAccount(senderAccNum);
+    Account* receiver = findAccount(receiverAccNum);
+    
+    if (sender && receiver) {
+        sender->transferTo(*receiver, amount);
+    } else {
+        cout << "One or both accounts not found!" << endl;
+    }
+}
+
+void displayAccounts() {
+    if (accounts.empty()) {
+        cout << "No accounts available." << endl;
+    } else {
+        for (auto &acc : accounts) {
+            acc.display();
+        }
+    }
+}
+
+int main() {
+    int choice;
+    do {
+        cout << "\nBanking System Menu" << endl;
+        cout << "1. Create Account" << endl;
+        cout << "2. Deposit Money" << endl;
+        cout << "3. Withdraw Money" << endl;
+        cout << "4. Transfer Money" << endl;
+        cout << "5. Display All Accounts" << endl;
+        cout << "6. Exit" << endl;
+        cout << "Enter choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1: createAccount(); break;
+            case 2: depositMoney(); break;
+            case 3: withdrawMoney(); break;
+            case 4: transferMoney(); break;
+            case 5: displayAccounts(); break;
+            case 6: cout << "Exiting program..." << endl; break;
+            default: cout << "Invalid choice!" << endl;
+        }
+    } while (choice != 6);
+    return 0;
+}
