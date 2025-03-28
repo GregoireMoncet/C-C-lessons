@@ -1,0 +1,38 @@
+C++ Quiz Game : Document Explanation
+
+How the Quiz Game Works
+
+1. Topic Selection: 
+   The game begins by presenting a list of available quiz topics. The player is prompted to choose a topic by entering the corresponding number.
+
+2. Question Bank: 
+   The questions are stored within a vector of QuizTopic objects, where each topic contains a list of questions and their respective answer choices. Each question consists of a string (the question itself), a list of options (A, B, C, D), and the correct answer.
+
+3. Answer Input: 
+   Once the player selects a topic, the game presents questions from that topic. For each question, the player is prompted to input their answer (A, B, C, or D). The input is validated to ensure that the player enters a valid answer. If an invalid answer is provided, the game will ask the player to input a valid option again.
+
+4. Score Calculation: 
+   The game tracks the player’s score based on the number of correct answers. For each correct answer, the player receives one point. If the player answers a question incorrectly, they do not lose any points. At the end of the quiz, the player’s score is calculated by comparing the number of correct answers with the total number of questions.
+
+5. Pass/Fail Condition: 
+   The pass/fail criteria is based on the total number of correct answers. The player must answer at least 60% of the questions correctly to pass. Each of the subtopics has 5 questions so you need 3 good answers to pass.
+
+Key Features of the Game
+
+1. Multiple Quiz Subtopics: 
+   The game offers a variety of quiz subtopics, and each topic has multiple questions.
+
+2. Shuffling Questions: 
+   To ensure that each quiz attempt is unique, the questions are shuffled randomly. This prevents the player from memorizing the order of questions.
+
+3. Validating Player Input: 
+   The game handles input validation for both topic selection and answer choices. If the player enters an invalid answer, the game will prompt them again until a valid input is provided.
+
+4. Score Feedback: 
+   After completing the quiz, the player is provided with feedback on their performance, including the total score and the percentage of correct answers. The game also informs the player whether they have passed or failed based on the score.
+
+Scoring and Passing Criteria
+- Scoring: Each correct answer earns the player +1 point. Incorrect answers do not deduct points.
+- Passing Criteria: 
+  The quizz has 5 questions for each subtopics so you need at least 3 good answers to pass (5*60/100=3).
+
